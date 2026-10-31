@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A study in order and interaction. Move through a living geometric grid.">
+  <title>GRID SHIFT. — Interactive Grid Study</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:wght,FILL@400,0&amp;icon_names=refresh&amp;display=block">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23df4d32' d='M0 0h14v14H0zm18 0h14v14H18zM0 18h14v14H0zm18 0h14v14H18z'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="scss/style.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="js/app.js"></script>
+</head>
+<body>
+  <header class="header">
+    <h1 class="logo">GRID SHIFT<span>.</span></h1>
+    <p class="edition">COPYRIGHT ⓒ 2026 UNI</p>
+  </header>
+  <main class="playground" aria-label="Interactive geometric grid. Move your pointer or drag to explore.">
+    <div class="tiles" aria-hidden="true"></div>
+  </main>
+  <footer class="footer">
+    <div class="guide"><p class="caption">MOVE TO REARRANGE.<br>DRAG ON TOUCH SCREENS.</p><button class="reset" type="button" aria-label="Reset grid"><span class="material-symbols-rounded" aria-hidden="true">refresh</span>Reset</button></div>
+    <section class="controls" aria-label="Grid controls">
+      <div class="field type-mode" role="group" aria-labelledby="mode-label"><span class="label" id="mode-label">01 / MODE</span><div class="options"><button type="button" data-mode="swap" aria-pressed="true">Swap</button><button type="button" data-mode="cascade" aria-pressed="false">Cascade</button><button type="button" data-mode="weave" aria-pressed="false">Weave</button></div></div>
+      <div class="field type-range"><label for="intensity">02 / INTENSITY <output id="intensity-value" for="intensity">60%</output></label><input id="intensity" type="range" min="0" max="100" value="60"></div>
+      <div class="field type-range"><label for="radius">03 / RADIUS <output id="radius-value" for="radius">6칸</output></label><input id="radius" type="range" min="4" max="10" step="1" value="6"></div>
+      <div class="field type-range"><label for="width">04 / WIDTH <output id="width-value" for="width">100%</output></label><input id="width" type="range" min="50" max="200" step="10" value="100"></div>
+      <div class="field type-range"><label for="height">05 / HEIGHT <output id="height-value" for="height">100%</output></label><input id="height" type="range" min="50" max="200" step="10" value="100"></div>
+    </section>
+  </footer>
+  <p class="status" role="status" hidden></p>
+</body>
+</html>

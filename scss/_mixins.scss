@@ -1,0 +1,6 @@
+@use 'variables' as *;
+@mixin flex($justify: space-between, $align: center, $gap: 0) { display: flex; justify-content: $justify; align-items: $align; gap: $gap; }
+@mixin position($type: absolute, $top: auto, $right: auto, $bottom: auto, $left: auto) { position: $type; inset: $top $right $bottom $left; }
+@mixin font($size: 11px, $weight: 500, $spacing: .1em) { font-size: $size; font-weight: $weight; letter-spacing: $spacing; }
+@mixin size($width, $height: $width) { width: $width; height: $height; }
+@mixin mobile { @media (max-width: $mobile) { @content; } }
