@@ -4,7 +4,7 @@
 
 @font-face { font-family: 'Inter'; font-style: normal; font-weight: 100 900; font-display: swap; src: url('../assets/fonts/inter-latin-wght-normal.woff2') format('woff2'); }
 
-body { display: flex; flex-direction: column; gap: 24px; height: 100dvh; padding: 24px $gutter calc(32px + env(safe-area-inset-bottom, 0px)); overflow: hidden; background: $paper; color: $ink; font-family: 'Inter', Arial, Helvetica, sans-serif; }
+body { --control-font-size: 10.4px; --mode-size: 13px; --reset-size: 14.3px; display: flex; flex-direction: column; gap: 24px; height: 100dvh; padding: 24px $gutter calc(32px + env(safe-area-inset-bottom, 0px)); overflow: hidden; background: $paper; color: $ink; font-family: 'Inter', Arial, Helvetica, sans-serif; }
 .header {
   flex-shrink: 0; padding-bottom: clamp(16px, 4dvh, 64px);
   .logo { @include font(clamp(56px, 9.5vw, 144px), 900, -0.025em); line-height: .95; span { color: $ink; } }
@@ -22,8 +22,8 @@ body { display: flex; flex-direction: column; gap: 24px; height: 100dvh; padding
   .caption { @include font($support-font-size, 500, .04em); line-height: 1.6; }
   .guide { @include flex(space-between, center, 20px); flex: 1; }
   .reset {
-    @include flex(center, center, 4px); flex-shrink: 0; background: transparent; font-size: 14.3px; padding: 7.8px 0;
-    .reset-icon { width: 1.2em; height: 1.2em; }
+    @include flex(center, center, 4px); flex-shrink: 0; background: transparent; font-size: var(--control-font-size); padding: 7.8px 0; min-width: calc(4.13 * var(--reset-size)); height: calc(1.2 * var(--reset-size) + 15.6px);
+    .reset-icon { width: calc(1.2 * var(--reset-size)); height: calc(1.2 * var(--reset-size)); }
     &.is-active { animation: blink .25s ease-in-out; @media (prefers-reduced-motion: reduce) { animation: none; } }
   }
 }
@@ -36,12 +36,15 @@ body { display: flex; flex-direction: column; gap: 24px; height: 100dvh; padding
   @include flex(flex-start, flex-end, 20px);
   .field {
     width: clamp(93.6px, 10.4vw, 156px); min-width: 0;
-    label, .label { @include font(10.4px, 600, .06em);}
+    label, .label { @include font(var(--control-font-size), 600, .06em);}
     label { @include flex; }
-    &.type-mode { @include flex(space-between, center, 16px); width: auto; .label { white-space: nowrap; } }
-    .options { @include flex(flex-start, center, 4px); height: 36.4px;
+    &.type-mode { @include flex(space-between, center, 16px); flex-wrap: wrap; width: auto; .label { white-space: nowrap; } }
+    .options { @include flex(flex-start, center, 4px); height: 36.4px; margin-left: auto;
       button {
-        padding: 7.8px 10.4px; border: 1px solid rgba($ink,0.7); border-radius: 999px; background: transparent; font-size: 13px;
+        padding: 0 calc(.8 * var(--mode-size) + .5em); height: calc(2.5846 * var(--mode-size)); border: 1px solid rgba($ink,0.7); border-radius: 999px; background: transparent; font-size: var(--control-font-size);
+        &[data-mode='swap'] { min-width: calc(4.39 * var(--mode-size) + 1em); }
+        &[data-mode='cascade'] { min-width: calc(5.92 * var(--mode-size) + 1em); }
+        &[data-mode='weave'] { min-width: calc(4.96 * var(--mode-size) + 1em); }
         &[aria-pressed='true'] {
           background: $ink; color: $paper;
         }
@@ -53,11 +56,11 @@ body { display: flex; flex-direction: column; gap: 24px; height: 100dvh; padding
         &::before { content: ''; position: absolute; top: 50%; left: 0; right: 0; height: $range-track-height; background: rgba($ink, .5); pointer-events: none; }
       }
       .range-visual {
-        position: absolute; top: 50%; left: calc($range-hit-size / 2); right: calc($range-hit-size / 2); pointer-events: none;
+        position: absolute; top: 50%; left: 0; right: 0; pointer-events: none;
         &::after { content: ''; position: absolute; left: calc(var(--range-progress, 0) * 100%); top: 0; width: $range-thumb-size; height: $range-thumb-size; transform: translate(-50%, -50%); border-radius: 50%; background: $ink; box-shadow: none; filter: none; }
       }
       input {
-        @include size(100%, $range-hit-size); display: block; position: relative; z-index: 1; opacity: 0; appearance: none; -webkit-appearance: none; background: transparent; box-shadow: none; filter: none;
+        @include size(calc(100% + $range-hit-size), $range-hit-size); margin-left: calc($range-hit-size / -2); clip-path: inset(0 calc($range-hit-size / 2)); display: block; position: relative; z-index: 1; opacity: 0; appearance: none; -webkit-appearance: none; background: transparent; box-shadow: none; filter: none;
         &::-webkit-slider-runnable-track { height: $range-track-height; border: 0; border-radius: 999px; background: rgba($ink, .5); }
         &::-moz-range-track { height: $range-track-height; border: 0; border-radius: 999px; background: rgba($ink, .5); }
         // The native slider handles input only; all visible parts are drawn outside it.
@@ -84,13 +87,12 @@ body { display: flex; flex-direction: column; gap: 24px; height: 100dvh; padding
 }
 // Touch phones/tablets scale type from the available page width. Desktop type stays unchanged.
 @media (max-width: 1100px) and (pointer: coarse) {
-  body { container-type: inline-size; }
+  body { container-type: inline-size; --control-font-size: clamp(.58rem, 2.9714cqw, .85rem); --mode-size: clamp(.72rem, 3.7143cqw, 1.0625rem); --reset-size: clamp(.8rem, 4.0857cqw, 1.2rem); }
   .header .logo { font-size: clamp(3rem, 13.72cqw, 6rem); }
   .header .edition, .footer .caption { font-size: clamp(.575rem, 2.9571cqw, .85rem); }
-  .footer .reset { font-size: clamp(.8rem, 4.0857cqw, 1.2rem); }
   .controls .field {
-    label, .label { font-size: clamp(.58rem, 2.9714cqw, .85rem); }
-    .options { height: auto; button { font-size: clamp(.72rem, 3.7143cqw, 1.0625rem); padding: .6em .8em; } }
+    label, .label { font-size: var(--control-font-size); }
+    .options { height: auto; }
   }
   .status { font-size: clamp(.625rem, 3.1429cqw, .9rem); }
 }

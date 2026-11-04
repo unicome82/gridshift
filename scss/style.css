@@ -30,6 +30,9 @@ button, input[type=range] {
   src: url("../assets/fonts/inter-latin-wght-normal.woff2") format("woff2");
 }
 body {
+  --control-font-size: 10.4px;
+  --mode-size: 13px;
+  --reset-size: 14.3px;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -106,12 +109,14 @@ body {
   gap: 4px;
   flex-shrink: 0;
   background: transparent;
-  font-size: 14.3px;
+  font-size: var(--control-font-size);
   padding: 7.8px 0;
+  min-width: calc(4.13 * var(--reset-size));
+  height: calc(1.2 * var(--reset-size) + 15.6px);
 }
 .footer .reset .reset-icon {
-  width: 1.2em;
-  height: 1.2em;
+  width: calc(1.2 * var(--reset-size));
+  height: calc(1.2 * var(--reset-size));
 }
 .footer .reset.is-active {
   animation: blink 0.25s ease-in-out;
@@ -142,7 +147,7 @@ body {
   min-width: 0;
 }
 .controls .field label, .controls .field .label {
-  font-size: 10.4px;
+  font-size: var(--control-font-size);
   font-weight: 600;
   letter-spacing: 0.06em;
 }
@@ -157,6 +162,7 @@ body {
   justify-content: space-between;
   align-items: center;
   gap: 16px;
+  flex-wrap: wrap;
   width: auto;
 }
 .controls .field.type-mode .label {
@@ -168,13 +174,24 @@ body {
   align-items: center;
   gap: 4px;
   height: 36.4px;
+  margin-left: auto;
 }
 .controls .field .options button {
-  padding: 7.8px 10.4px;
+  padding: 0 calc(0.8 * var(--mode-size) + 0.5em);
+  height: calc(2.5846 * var(--mode-size));
   border: 1px solid rgba(32, 33, 31, 0.7);
   border-radius: 999px;
   background: transparent;
-  font-size: 13px;
+  font-size: var(--control-font-size);
+}
+.controls .field .options button[data-mode=swap] {
+  min-width: calc(4.39 * var(--mode-size) + 1em);
+}
+.controls .field .options button[data-mode=cascade] {
+  min-width: calc(5.92 * var(--mode-size) + 1em);
+}
+.controls .field .options button[data-mode=weave] {
+  min-width: calc(4.96 * var(--mode-size) + 1em);
 }
 .controls .field .options button[aria-pressed=true] {
   background: #20211f;
@@ -197,8 +214,8 @@ body {
 .controls .field.type-range .range-visual {
   position: absolute;
   top: 50%;
-  left: 22px;
-  right: 22px;
+  left: 0;
+  right: 0;
   pointer-events: none;
 }
 .controls .field.type-range .range-visual::after {
@@ -215,8 +232,10 @@ body {
   filter: none;
 }
 .controls .field.type-range input {
-  width: 100%;
+  width: calc(100% + 44px);
   height: 44px;
+  margin-left: -22px;
+  clip-path: inset(0 22px);
   display: block;
   position: relative;
   z-index: 1;
@@ -319,6 +338,9 @@ body {
 @media (max-width: 1100px) and (pointer: coarse) {
   body {
     container-type: inline-size;
+    --control-font-size: clamp(.58rem, 2.9714cqw, .85rem);
+    --mode-size: clamp(.72rem, 3.7143cqw, 1.0625rem);
+    --reset-size: clamp(.8rem, 4.0857cqw, 1.2rem);
   }
   .header .logo {
     font-size: clamp(3rem, 13.72cqw, 6rem);
@@ -326,18 +348,11 @@ body {
   .header .edition, .footer .caption {
     font-size: clamp(0.575rem, 2.9571cqw, 0.85rem);
   }
-  .footer .reset {
-    font-size: clamp(0.8rem, 4.0857cqw, 1.2rem);
-  }
   .controls .field label, .controls .field .label {
-    font-size: clamp(0.58rem, 2.9714cqw, 0.85rem);
+    font-size: var(--control-font-size);
   }
   .controls .field .options {
     height: auto;
-  }
-  .controls .field .options button {
-    font-size: clamp(0.72rem, 3.7143cqw, 1.0625rem);
-    padding: 0.6em 0.8em;
   }
   .status {
     font-size: clamp(0.625rem, 3.1429cqw, 0.9rem);
