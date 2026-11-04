@@ -1,5 +1,6 @@
 (() => {
   'use strict';
+  document.documentElement.classList.toggle('is-standalone', navigator.standalone === true || matchMedia('(display-mode: standalone)').matches);
   const stage = document.querySelector('.playground');
   const grid = document.querySelector('.tiles');
   const modes = document.querySelectorAll('[data-mode]');

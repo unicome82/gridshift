@@ -4,7 +4,7 @@
 
 @font-face { font-family: 'Inter'; font-style: normal; font-weight: 100 900; font-display: swap; src: url('../assets/fonts/inter-latin-wght-normal.woff2') format('woff2'); }
 
-body { --control-font-size: 10.4px; --mode-size: 13px; --reset-size: 14.3px; display: flex; flex-direction: column; gap: 24px; height: 100dvh; padding: 24px $gutter calc(32px + env(safe-area-inset-bottom, 0px)); overflow: hidden; background: $paper; color: $ink; font-family: 'Inter', Arial, Helvetica, sans-serif; }
+body { --control-font-size: 10.4px; --mode-size: 13px; --reset-size: 14.3px; display: flex; flex-direction: column; gap: 24px; height: 100dvh; padding: 24px $gutter calc(16px + env(safe-area-inset-bottom, 0px)); overflow: hidden; background: $paper; color: $ink; font-family: 'Inter', Arial, Helvetica, sans-serif; }
 .header {
   flex-shrink: 0; padding-bottom: clamp(16px, 4dvh, 64px);
   .logo { @include font(clamp(56px, 9.5vw, 144px), 900, -0.025em); line-height: .95; span { color: $ink; } }
@@ -111,4 +111,9 @@ body { --control-font-size: 10.4px; --mode-size: 13px; --reset-size: 14.3px; dis
 
 @media (max-width: 1100px) and (pointer: coarse) and (max-height: 500px) {
   .header .logo { font-size: clamp(3rem, 6cqw, 4rem); }
+}
+
+// Browser chrome already supplies bottom separation; installed apps keep a safe inset.
+@media (pointer: coarse) and (display-mode: browser) {
+  html:not(.is-standalone) body { padding-bottom: 0; }
 }
