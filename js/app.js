@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   'use strict';
   const stage = document.querySelector('.playground');
   const grid = document.querySelector('.tiles');
@@ -163,7 +163,13 @@
     void button.offsetWidth;
     button.classList.add('is-active');
   });
+  function updateRangeVisual(input) {
+    const progress = (+input.value - +input.min) / (+input.max - +input.min);
+    input.parentElement.style.setProperty('--range-progress', progress);
+  }
+  [intensity, radius, sizeX, sizeY].forEach(updateRangeVisual);
   [intensity, radius, sizeX, sizeY].forEach(input => input.addEventListener('input', () => {
+    updateRangeVisual(input);
     pause();
     document.querySelector(`#${input.id}-value`).value = input.value + (input === radius ? '칸' : '%');
     if (input === sizeX || input === sizeY) {

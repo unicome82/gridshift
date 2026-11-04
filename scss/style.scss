@@ -48,13 +48,21 @@ body { display: flex; flex-direction: column; gap: 24px; height: 100dvh; padding
       }
     }
     &.type-range {
+      .range-control {
+        position: relative; height: $range-hit-size;
+        &::before { content: ''; position: absolute; top: 50%; left: 0; right: 0; height: $range-track-height; background: rgba($ink, .5); pointer-events: none; }
+      }
+      .range-visual {
+        position: absolute; top: 50%; left: calc($range-hit-size / 2); right: calc($range-hit-size / 2); pointer-events: none;
+        &::after { content: ''; position: absolute; left: calc(var(--range-progress, 0) * 100%); top: 0; width: $range-thumb-size; height: $range-thumb-size; transform: translate(-50%, -50%); border-radius: 50%; background: $ink; box-shadow: none; filter: none; }
+      }
       input {
-        @include size(100%, $range-hit-size); display: block; appearance: none; -webkit-appearance: none; background: transparent;
+        @include size(100%, $range-hit-size); display: block; position: relative; z-index: 1; opacity: 0; appearance: none; -webkit-appearance: none; background: transparent; box-shadow: none; filter: none;
         &::-webkit-slider-runnable-track { height: $range-track-height; border: 0; border-radius: 999px; background: rgba($ink, .5); }
         &::-moz-range-track { height: $range-track-height; border: 0; border-radius: 999px; background: rgba($ink, .5); }
-        // Only the center dot is painted; the rest of the native 44px drag target is transparent.
-        &::-webkit-slider-thumb { -webkit-appearance: none; @include size($range-hit-size); box-sizing: border-box; margin-top: 0; transform: translateY(calc(-50% + $range-track-height / 2)); border: 0; border-radius: 50%; background: radial-gradient(circle at center, $ink 0 calc($range-thumb-size / 2), transparent calc($range-thumb-size / 2)); box-shadow: none; cursor: grab; }
-        &::-moz-range-thumb { @include size($range-hit-size); box-sizing: border-box; border: 0; border-radius: 50%; background: radial-gradient(circle at center, $ink 0 calc($range-thumb-size / 2), transparent calc($range-thumb-size / 2)); box-shadow: none; cursor: grab; }
+        // The native slider handles input only; all visible parts are drawn outside it.
+        &::-webkit-slider-thumb { -webkit-appearance: none; @include size($range-hit-size); box-sizing: border-box; margin-top: 0; transform: translateY(calc(-50% + $range-track-height / 2)); border: 0; border-radius: 50%; background: transparent; box-shadow: none; cursor: grab; }
+        &::-moz-range-thumb { @include size($range-hit-size); box-sizing: border-box; border: 0; border-radius: 50%; background: transparent; box-shadow: none; cursor: grab; }
       }
       output { font-weight: 400; letter-spacing: 0; }
     }
