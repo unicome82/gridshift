@@ -51,9 +51,9 @@ body { display: flex; flex-direction: column; gap: 24px; height: 100dvh; padding
         @include size(100%, $range-hit-size); display: block; appearance: none; -webkit-appearance: none; background: transparent;
         &::-webkit-slider-runnable-track { height: $range-track-height; border: 0; border-radius: 999px; background: rgba($ink, .5); }
         &::-moz-range-track { height: $range-track-height; border: 0; border-radius: 999px; background: rgba($ink, .5); }
-        // Transparent borders enlarge the native drag target without enlarging the visible dot.
-        &::-webkit-slider-thumb { -webkit-appearance: none; @include size($range-hit-size); box-sizing: border-box; margin-top: 0; transform: translateY(calc(-50% + $range-track-height / 2)); border: calc(($range-hit-size - $range-thumb-size) / 2) solid transparent; border-radius: 50%; background: $ink; background-clip: content-box; cursor: grab; }
-        &::-moz-range-thumb { @include size($range-hit-size); box-sizing: border-box; border: calc(($range-hit-size - $range-thumb-size) / 2) solid transparent; border-radius: 50%; background: $ink; background-clip: content-box; cursor: grab; }
+        // Only the center dot is painted; the rest of the native 44px drag target is transparent.
+        &::-webkit-slider-thumb { -webkit-appearance: none; @include size($range-hit-size); box-sizing: border-box; margin-top: 0; transform: translateY(calc(-50% + $range-track-height / 2)); border: 0; border-radius: 50%; background: radial-gradient(circle at center, $ink 0 calc($range-thumb-size / 2), transparent calc($range-thumb-size / 2)); box-shadow: none; cursor: grab; }
+        &::-moz-range-thumb { @include size($range-hit-size); box-sizing: border-box; border: 0; border-radius: 50%; background: radial-gradient(circle at center, $ink 0 calc($range-thumb-size / 2), transparent calc($range-thumb-size / 2)); box-shadow: none; cursor: grab; }
       }
       output { font-weight: 400; letter-spacing: 0; }
     }
@@ -73,9 +73,30 @@ body { display: flex; flex-direction: column; gap: 24px; height: 100dvh; padding
   .footer { flex-wrap: wrap; gap: 12px; }
   .controls { width: 100%; justify-content: space-between; }
 }
+// Touch phones/tablets scale type from the available page width. Desktop type stays unchanged.
+@media (max-width: 1100px) and (pointer: coarse) {
+  body { container-type: inline-size; }
+  .header .logo { font-size: clamp(3rem, 13.72cqw, 6rem); }
+  .header .edition, .footer .caption { font-size: clamp(.575rem, 2.9571cqw, .85rem); }
+  .footer .reset { font-size: clamp(.8rem, 4.0857cqw, 1.2rem); }
+  .controls .field {
+    label, .label { font-size: clamp(.58rem, 2.9714cqw, .85rem); }
+    .options { height: auto; button { font-size: clamp(.72rem, 3.7143cqw, 1.0625rem); padding: .6em .8em; } }
+  }
+  .status { font-size: clamp(.625rem, 3.1429cqw, .9rem); }
+}
+@media (min-width: 601px) and (max-width: 1100px) and (pointer: coarse) and (min-height: 501px) {
+  .footer { display: block; .guide { margin-bottom: 12px; } }
+  .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; .field { width: auto; } }
+  .controls .field.type-mode { grid-column: 1 / -1; }
+}
 @media (max-height: 500px) {
   body { padding-top: 12px; gap: 12px; }
   .header { padding-bottom: 0; .logo { font-size: 48px; } .edition { margin-top: 6px; } }
   .footer { flex-wrap: nowrap; .caption { display: none; } }
   .controls { display: flex; gap: 8px; .field { width: clamp(40px, 10vw, 100px); &.type-mode { width: auto; } } }
+}
+
+@media (max-width: 1100px) and (pointer: coarse) and (max-height: 500px) {
+  .header .logo { font-size: clamp(3rem, 6cqw, 4rem); }
 }

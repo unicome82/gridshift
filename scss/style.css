@@ -206,20 +206,20 @@ body {
   box-sizing: border-box;
   margin-top: 0;
   transform: translateY(calc(-50% + 0.5px));
-  border: 15.5px solid transparent;
+  border: 0;
   border-radius: 50%;
-  background: #20211f;
-  background-clip: content-box;
+  background: radial-gradient(circle at center, #20211f 0 6.5px, transparent 6.5px);
+  box-shadow: none;
   cursor: grab;
 }
 .controls .field.type-range input::-moz-range-thumb {
   width: 44px;
   height: 44px;
   box-sizing: border-box;
-  border: 15.5px solid transparent;
+  border: 0;
   border-radius: 50%;
-  background: #20211f;
-  background-clip: content-box;
+  background: radial-gradient(circle at center, #20211f 0 6.5px, transparent 6.5px);
+  box-shadow: none;
   cursor: grab;
 }
 .controls .field.type-range output {
@@ -276,6 +276,52 @@ body {
     justify-content: space-between;
   }
 }
+@media (max-width: 1100px) and (pointer: coarse) {
+  body {
+    container-type: inline-size;
+  }
+  .header .logo {
+    font-size: clamp(3rem, 13.72cqw, 6rem);
+  }
+  .header .edition, .footer .caption {
+    font-size: clamp(0.575rem, 2.9571cqw, 0.85rem);
+  }
+  .footer .reset {
+    font-size: clamp(0.8rem, 4.0857cqw, 1.2rem);
+  }
+  .controls .field label, .controls .field .label {
+    font-size: clamp(0.58rem, 2.9714cqw, 0.85rem);
+  }
+  .controls .field .options {
+    height: auto;
+  }
+  .controls .field .options button {
+    font-size: clamp(0.72rem, 3.7143cqw, 1.0625rem);
+    padding: 0.6em 0.8em;
+  }
+  .status {
+    font-size: clamp(0.625rem, 3.1429cqw, 0.9rem);
+  }
+}
+@media (min-width: 601px) and (max-width: 1100px) and (pointer: coarse) and (min-height: 501px) {
+  .footer {
+    display: block;
+  }
+  .footer .guide {
+    margin-bottom: 12px;
+  }
+  .controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .controls .field {
+    width: auto;
+  }
+  .controls .field.type-mode {
+    grid-column: 1/-1;
+  }
+}
 @media (max-height: 500px) {
   body {
     padding-top: 12px;
@@ -305,5 +351,10 @@ body {
   }
   .controls .field.type-mode {
     width: auto;
+  }
+}
+@media (max-width: 1100px) and (pointer: coarse) and (max-height: 500px) {
+  .header .logo {
+    font-size: clamp(3rem, 6cqw, 4rem);
   }
 }
