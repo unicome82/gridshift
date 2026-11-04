@@ -82,6 +82,9 @@ body {
   inset: 0 auto auto 0;
 }
 
+.footer button {
+  text-transform: uppercase;
+}
 .footer {
   flex-shrink: 0;
   display: flex;

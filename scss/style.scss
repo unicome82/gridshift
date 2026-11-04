@@ -17,6 +17,7 @@ body { --control-font-size: 10.4px; --mode-size: 13px; --reset-size: 14.3px; dis
   .tile { @include position(absolute, 0, auto, auto, 0); }
 }
 .footer {
+  button { text-transform: uppercase; }
   flex-shrink: 0;
   @include flex(space-between, flex-end, 24px);
   .caption { @include font($support-font-size, 500, .04em); line-height: 1.6; }
