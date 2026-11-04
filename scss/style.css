@@ -110,6 +110,8 @@ body {
   flex-shrink: 0;
   background: transparent;
   font-size: var(--control-font-size);
+  font-weight: 600;
+  letter-spacing: 0.06em;
   padding: 7.8px 0;
   min-width: calc(4.13 * var(--reset-size));
   height: calc(1.2 * var(--reset-size) + 15.6px);
@@ -183,6 +185,8 @@ body {
   border-radius: 999px;
   background: transparent;
   font-size: var(--control-font-size);
+  font-weight: 600;
+  letter-spacing: 0.06em;
 }
 .controls .field .options button[data-mode=swap] {
   min-width: calc(4.39 * var(--mode-size) + 1em);

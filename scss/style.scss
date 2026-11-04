@@ -22,7 +22,7 @@ body { --control-font-size: 10.4px; --mode-size: 13px; --reset-size: 14.3px; dis
   .caption { @include font($support-font-size, 500, .04em); line-height: 1.6; }
   .guide { @include flex(space-between, center, 20px); flex: 1; }
   .reset {
-    @include flex(center, center, 4px); flex-shrink: 0; background: transparent; font-size: var(--control-font-size); padding: 7.8px 0; min-width: calc(4.13 * var(--reset-size)); height: calc(1.2 * var(--reset-size) + 15.6px);
+    @include flex(center, center, 4px); flex-shrink: 0; background: transparent; @include font(var(--control-font-size), 600, .06em); padding: 7.8px 0; min-width: calc(4.13 * var(--reset-size)); height: calc(1.2 * var(--reset-size) + 15.6px);
     .reset-icon { width: calc(1.2 * var(--reset-size)); height: calc(1.2 * var(--reset-size)); }
     &.is-active { animation: blink .25s ease-in-out; @media (prefers-reduced-motion: reduce) { animation: none; } }
   }
@@ -41,7 +41,7 @@ body { --control-font-size: 10.4px; --mode-size: 13px; --reset-size: 14.3px; dis
     &.type-mode { @include flex(space-between, center, 16px); flex-wrap: wrap; width: auto; .label { white-space: nowrap; } }
     .options { @include flex(flex-start, center, 4px); height: 36.4px; margin-left: auto;
       button {
-        padding: 0 calc(.8 * var(--mode-size) + .5em); height: calc(2.5846 * var(--mode-size)); border: 1px solid rgba($ink,0.7); border-radius: 999px; background: transparent; font-size: var(--control-font-size);
+        padding: 0 calc(.8 * var(--mode-size) + .5em); height: calc(2.5846 * var(--mode-size)); border: 1px solid rgba($ink,0.7); border-radius: 999px; background: transparent; @include font(var(--control-font-size), 600, .06em);
         &[data-mode='swap'] { min-width: calc(4.39 * var(--mode-size) + 1em); }
         &[data-mode='cascade'] { min-width: calc(5.92 * var(--mode-size) + 1em); }
         &[data-mode='weave'] { min-width: calc(4.96 * var(--mode-size) + 1em); }
