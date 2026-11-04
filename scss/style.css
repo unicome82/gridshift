@@ -131,6 +131,7 @@ body {
   }
 }
 .controls {
+  padding-top: 12px;
   display: flex;
   justify-content: flex-start;
   align-items: flex-end;

@@ -32,6 +32,7 @@ body { display: flex; flex-direction: column; gap: 24px; height: 100dvh; padding
   50% { opacity: .2; }
 }
 .controls {
+  padding-top: 12px;
   @include flex(flex-start, flex-end, 20px);
   .field {
     width: clamp(93.6px, 10.4vw, 156px); min-width: 0;
