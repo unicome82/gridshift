@@ -48,11 +48,12 @@ body { display: flex; flex-direction: column; gap: 24px; height: 100dvh; padding
     }
     &.type-range {
       input {
-        @include size(100%, 20.8px); display: block; appearance: none; -webkit-appearance: none; background: transparent;
+        @include size(100%, $range-hit-size); display: block; appearance: none; -webkit-appearance: none; background: transparent;
         &::-webkit-slider-runnable-track { height: $range-track-height; border: 0; border-radius: 999px; background: rgba($ink, .5); }
         &::-moz-range-track { height: $range-track-height; border: 0; border-radius: 999px; background: rgba($ink, .5); }
-        &::-webkit-slider-thumb { -webkit-appearance: none; @include size($range-thumb-size); margin-top: 0; transform: translateY(calc(-50% + $range-track-height / 2)); border: 0; border-radius: 50%; background: $ink; }
-        &::-moz-range-thumb { @include size($range-thumb-size); border: 0; border-radius: 50%; background: $ink; }
+        // Transparent borders enlarge the native drag target without enlarging the visible dot.
+        &::-webkit-slider-thumb { -webkit-appearance: none; @include size($range-hit-size); box-sizing: border-box; margin-top: 0; transform: translateY(calc(-50% + $range-track-height / 2)); border: calc(($range-hit-size - $range-thumb-size) / 2) solid transparent; border-radius: 50%; background: $ink; background-clip: content-box; cursor: grab; }
+        &::-moz-range-thumb { @include size($range-hit-size); box-sizing: border-box; border: calc(($range-hit-size - $range-thumb-size) / 2) solid transparent; border-radius: 50%; background: $ink; background-clip: content-box; cursor: grab; }
       }
       output { font-weight: 400; letter-spacing: 0; }
     }
