@@ -50,4 +50,4 @@ SCSS 변경 시 기존 Sass 컴파일러로 `scss/style.scss`를 `scss/style.css
 
 ## iPhone 홈 화면 아이콘
 
-Safari에서 공유 → 홈 화면에 추가를 선택하면 모자이크 아이콘을 사용합니다. `assets/icons/apple-touch-icon.png`는 180×180 PNG이며, 일반 브라우저 아이콘은 `assets/icons/icon-192.png`를 사용합니다. 기존에 추가한 바로가기에 예전 아이콘이 남아 있으면 삭제 후 다시 추가합니다.
+Safari에서 공유 → 홈 화면에 추가를 선택하면 모자이크 아이콘을 사용합니다. `assets/icons/apple-touch-icon.png`는 180×180 PNG이며, 일반 브라우저 아이콘은 같은 이미지의 `assets/icons/icon-192.png`, `assets/icons/favicon-32.png`, `assets/icons/favicon-16.png`를 사용합니다. 기존에 추가한 바로가기에 예전 아이콘이 남아 있으면 삭제 후 다시 추가합니다.
