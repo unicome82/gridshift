@@ -1,6 +1,8 @@
-﻿@use 'reset';
+@use 'reset';
 @use 'variables' as *;
 @use 'mixins' as *;
+
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 100 900; font-display: swap; src: url('../assets/fonts/inter-latin-wght-normal.woff2') format('woff2'); }
 
 body { display: flex; flex-direction: column; gap: 24px; height: 100dvh; padding: 24px $gutter max(16px, env(safe-area-inset-bottom)); overflow: hidden; background: $paper; color: $ink; font-family: 'Inter', Arial, Helvetica, sans-serif; }
 .header {
@@ -17,11 +19,11 @@ body { display: flex; flex-direction: column; gap: 24px; height: 100dvh; padding
 .footer {
   flex-shrink: 0;
   @include flex(space-between, flex-end, 24px);
-  .caption { @include font(9px, 500, .04em); line-height: 1.6; }
+  .caption { @include font(11.7px, 500, .04em); line-height: 1.6; }
   .guide { @include flex(space-between, center, 20px); flex: 1; }
   .reset {
-    @include flex(center, center, 4px); flex-shrink: 0; background: transparent; font-size: 11px;
-    .material-symbols-rounded { font-size: 1.2em; line-height: 1; }
+    @include flex(center, center, 4px); flex-shrink: 0; background: transparent; font-size: 14.3px; padding: 7.8px 0;
+    .reset-icon { width: 1.2em; height: 1.2em; }
     &.is-active { animation: blink .25s ease-in-out; @media (prefers-reduced-motion: reduce) { animation: none; } }
   }
 }
@@ -32,21 +34,21 @@ body { display: flex; flex-direction: column; gap: 24px; height: 100dvh; padding
 .controls {
   @include flex(flex-start, flex-end, 20px);
   .field {
-    width: clamp(72px, 8vw, 120px); min-width: 0;
-    label, .label { @include font(8px, 600, .06em);}
+    width: clamp(93.6px, 10.4vw, 156px); min-width: 0;
+    label, .label { @include font(10.4px, 600, .06em);}
     label { @include flex; }
     &.type-mode { @include flex(space-between, center, 16px); width: auto; .label { white-space: nowrap; } }
-    .options { @include flex(flex-start, center, 4px); height: 28px; 
-      button { 
-        padding: 6px 8px; border: 1px solid rgba($ink,0.7); border-radius: 999px; background: transparent; font-size: 10px; 
-        &[aria-pressed='true'] { 
-          background: $ink; color: $paper; 
+    .options { @include flex(flex-start, center, 4px); height: 36.4px;
+      button {
+        padding: 7.8px 10.4px; border: 1px solid rgba($ink,0.7); border-radius: 999px; background: transparent; font-size: 13px;
+        &[aria-pressed='true'] {
+          background: $ink; color: $paper;
         }
-      } 
+      }
     }
     &.type-range {
       input {
-        @include size(100%, 16px); display: block; appearance: none; -webkit-appearance: none; background: transparent;
+        @include size(100%, 20.8px); display: block; appearance: none; -webkit-appearance: none; background: transparent;
         &::-webkit-slider-runnable-track { height: $range-track-height; border: 0; border-radius: 999px; background: rgba($ink, .5); }
         &::-moz-range-track { height: $range-track-height; border: 0; border-radius: 999px; background: rgba($ink, .5); }
         &::-webkit-slider-thumb { -webkit-appearance: none; @include size($range-thumb-size); margin-top: 0; transform: translateY(calc(-50% + $range-track-height / 2)); border: 0; border-radius: 50%; background: $ink; }
@@ -66,7 +68,7 @@ body { display: flex; flex-direction: column; gap: 24px; height: 100dvh; padding
   .controls .field.type-mode { grid-column: 1 / -1; }
   .status { bottom: 208px; }
 }
-@media (min-width: 601px) and (max-width: 1100px) {
+@media (min-width: 601px) and (max-width: 1400px) {
   .footer { flex-wrap: wrap; gap: 12px; }
   .controls { width: 100%; justify-content: space-between; }
 }

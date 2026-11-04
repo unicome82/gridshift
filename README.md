@@ -4,7 +4,7 @@
 
 ## 실행
 
-`index.html`을 브라우저에서 엽니다. GSAP CDN과 Google Fonts를 불러오려면 인터넷 연결이 필요합니다. GSAP을 불러오지 못하면 정적 그리드와 연결 안내를 표시합니다.
+`index.html`을 브라우저에서 엽니다. GSAP, Inter 폰트, Reset 아이콘을 `assets/`에 포함하므로 폴더 전체를 내려받으면 인터넷 없이도 동작합니다. 로컬 서버를 사용하려면 저장소에서 `python3 -m http.server 8000`을 실행합니다.
 
 ## 구조
 
@@ -39,3 +39,15 @@ SCSS 변경 시 기존 Sass 컴파일러로 `scss/style.scss`를 `scss/style.css
 크기 수치는 즉시 표시하고, 입력이 160ms 멈추거나 드래그를 놓으면 기존 블록을 재사용해 격자를 갱신합니다. 부족한 블록만 추가하고 초과한 블록만 제거합니다.
 
 무거운 초기화는 프레임당 최대 96개씩 나눠 처리합니다. 갱신 중 새 입력이 들어오면 이전 작업을 취소하고 마지막 크기를 적용합니다. 갱신 중에는 블록 교환을 잠시 멈추고 완료 후 재개합니다. 블록 수는 최대 40열×60행입니다.
+
+## 로컬 외부 자산
+
+- `assets/vendor/gsap-3.12.5.min.js`: 기존과 같은 GSAP 3.12.5. 배포 파일의 저작권·라이선스 헤더를 보존했습니다. https://gsap.com/standard-license
+- `assets/fonts/inter-latin-wght-normal.woff2`: Fontsource의 Inter 5.2.8 패키지에서 받은 Latin 가변 폰트(100–900). SIL OFL 라이선스 동봉. 한글은 기존처럼 시스템 폰트로 표시합니다.
+- `assets/icons/refresh.svg`: Google Material Symbols Rounded의 Refresh 아이콘. 아이콘 하나를 위해 웹폰트를 불러오는 대신 공식 SVG를 포함했습니다. Apache 2.0 라이선스 동봉.
+
+조절 영역의 글자, 모드 버튼 패딩, 슬라이더 thumb는 기존 대비 30% 확대했습니다.
+
+## iPhone 홈 화면 아이콘
+
+Safari에서 공유 → 홈 화면에 추가를 선택하면 모자이크 아이콘을 사용합니다. `assets/icons/apple-touch-icon.png`는 180×180 PNG이며, 일반 브라우저 아이콘은 `assets/icons/icon-192.png`를 사용합니다. 기존에 추가한 바로가기에 예전 아이콘이 남아 있으면 삭제 후 다시 추가합니다.
